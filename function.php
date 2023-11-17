@@ -1,5 +1,14 @@
 <?php
 
+
+function remove_space($var)
+{
+  $new = str_replace("\n", "", $var);
+  $new = str_replace("\t", "", $new);
+  $new = str_replace(" ", "", $new);
+  return $new;
+}
+
 function uuid() {
     return sprintf(
         '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -17,8 +26,9 @@ function uuid() {
 function nama(){
     $file = file_get_contents("data_nama.txt");
     $pecah = explode("\n", $file);
-    $rand = mt_rand(0, 1700);
+    $rand = mt_rand(0, 1699);
     $nama = $pecah[$rand];
+    $nama = remove_space($nama);
     return $nama;
 }
 
@@ -38,7 +48,7 @@ function angka()
 function maps(){
       $file = file_get_contents("data_maps.txt");
       $pecah = explode("\n", $file);
-      $rand = mt_rand(0, 1014);
+      $rand = mt_rand(0, 1000);
       $maps = $pecah[$rand];
       return $maps;
 }
