@@ -38,7 +38,7 @@ function angka()
 function maps(){
       $file = file_get_contents("data_maps.txt");
       $pecah = explode("\n", $file);
-      $rand = mt_rand(0, 509);
+      $rand = mt_rand(0, 1014);
       $maps = $pecah[$rand];
       return $maps;
 }
