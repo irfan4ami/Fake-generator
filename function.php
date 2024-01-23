@@ -6,6 +6,8 @@ function remove_space($var)
   $new = str_replace("\n", "", $var);
   $new = str_replace("\t", "", $new);
   $new = str_replace(" ", "", $new);
+  $new = str_replace("\r", "", $new);
+
   return $new;
 }
 
@@ -24,11 +26,9 @@ function uuid() {
 }
 
 function nama(){
-    $file = file_get_contents("data_nama.txt");
-    $pecah = explode("\n", $file);
+    $file = explode("\n", file_get_contents("data_nama.txt"));
     $rand = mt_rand(0, 1699);
-    $nama = $pecah[$rand];
-    $nama = remove_space($nama);
+    $nama = remove_space($file[$rand]);
     return $nama;
 }
 
@@ -46,9 +46,15 @@ function angka()
 }
 
 function maps(){
-      $file = file_get_contents("data_maps.txt");
-      $pecah = explode("\n", $file);
+      $file = explode("\n", file_get_contents("data_maps.txt"));
       $rand = mt_rand(0, 1000);
-      $maps = $pecah[$rand];
-      return $maps;
+      $maps = explode(",", $file[$rand]);
+      $lat = $maps[0].angka();
+      $long = $maps[1].angka();
+      
+      return array(
+        remove_space("$lat,$long"),
+        remove_space($lat),
+        remove_space($long)
+      );
 }

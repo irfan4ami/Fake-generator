@@ -1,33 +1,26 @@
 <?php
 include("function.php");
+
+
+
 ulang:
 $uuid = uuid();
+$maps = maps();    
 $firstname = trim(nama());
 $lastname = trim(nama());
-$fullname = "$firstname $lastname";
-$angka = angka();
-$username = "$firstname$angka";
-$email = "$username@gmail.com";
-$phone = "";
-$maps = maps();
-    $mapss = explode(",",$maps);
-    $latitude = trim($mapss[0]);
-    $rand = angka();
-    $latitude = "$latitude$rand";
-    $longitude = trim($mapss[1]);
-    $rand = angka();
-    $longitude = "$longitude$rand";
-    
+$rand = angka();
+$username = "$firstname$rand";
+
 $data = array(
-    'fullname' => $fullname,
+    'fullname' => "$firstname $lastname",
     'firstname' => $firstname,
     'lastname' => $lastname,
     'username' => $username,
-    'email' => $email,
+    'email' => "$username@gmail.com",
     'uuid' => $uuid,
-    'latitude' => $latitude,
-    'longitude' => $longitude,
-    'maps' => "$latitude,$longitude"
+    'latitude' => $maps[1],
+    'longitude' => $maps[2],
+    'maps' => $maps[0]
 );
  
 $json_data = json_encode($data);
